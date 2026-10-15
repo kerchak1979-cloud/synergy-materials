@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Тренажёры и тесты — Университет «Синергия»</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --synergy-navy: #0A2B5C;
+    --synergy-blue: #1E5BA8;
+    --synergy-light-blue: #E8F0FA;
+    --synergy-yellow: #FFC72C;
+    --synergy-gray: #F5F7FA;
+    --text-dark: #1a2332;
+    --text-muted: #5d6d7e;
+  }
+
+  body {
+    font-family: 'Segoe UI', 'PT Sans', Roboto, Arial, sans-serif;
+    background: #EDF2F7;
+    color: var(--text-dark);
+    line-height: 1.6;
+    padding: 30px 20px;
+  }
+
+  .document {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(10, 43, 92, 0.12);
+    overflow: hidden;
+  }
+
+  /* ===== ШАПКА ===== */
+  .header {
+    background: linear-gradient(135deg, var(--synergy-navy) 0%, var(--synergy-blue) 100%);
+    color: #fff;
+    padding: 40px 50px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    background: var(--synergy-yellow);
+    border-radius: 50%;
+    opacity: 0.15;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    bottom: -80px; right: 80px;
+    width: 160px; height: 160px;
+    background: #fff;
+    border-radius: 50%;
+    opacity: 0.06;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+    position: relative; z-index: 1;
+  }
+  .brand-logo {
+    width: 52px; height: 52px;
+    background: var(--synergy-yellow);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 1.5em; color: var(--synergy-navy);
+    box-shadow: 0 6px 20px rgba(255, 199, 44, 0.4);
+  }
+  .brand-name {
+    font-size: 1.3em;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .brand-name small {
+    display: block;
+    font-size: 0.6em;
+    font-weight: 400;
+    opacity: 0.85;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .header h1 {
+    font-size: 2em;
+    font-weight: 700;
+    margin-bottom: 8px;
+    position: relative; z-index: 1;
+    line-height: 1.25;
+  }
+  .header p {
+    font-size: 1.05em;
+    opacity: 0.9;
+    position: relative; z-index: 1;
+  }
+  .badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    margin-top: 14px;
+    position: relative; z-index: 1;
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== ОСНОВНОЙ КОНТЕНТ ===== */
+  .content { padding: 44px 50px 50px; }
+
+  .section-title {
+    font-size: 0.85em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--synergy-blue);
+    margin-bottom: 8px;
+  }
+  .section-heading {
+    font-size: 1.5em;
+    color: var(--synergy-navy);
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  .section-sub {
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    font-size: 0.98em;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 24px;
+  }
+
+  /* ===== КАРТОЧКИ ===== */
+  .card {
+    background: #fff;
+    border: 2px solid #E1E8F0;
+    border-radius: 18px;
+    padding: 26px 24px 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .card:hover {
+    border-color: var(--synergy-blue);
+    box-shadow: 0 12px 32px rgba(30, 91, 168, 0.15);
+    transform: translateY(-4px);
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--synergy-blue), var(--synergy-yellow));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .card:hover::before { opacity: 1; }
+
+  .card-icon {
+    width: 56px; height: 56px;
+    border-radius: 14px;
+    background: var(--synergy-light-blue);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+    font-size: 1.6em;
+  }
+  .card.qr .card-icon { background: #FFF6DA; }
+
+  .qr-wrap {
+    background: #fff;
+    padding: 14px;
+    border-radius: 14px;
+    border: 2px solid #E1E8F0;
+    margin-bottom: 18px;
+    transition: border-color 0.3s;
+  }
+  .card:hover .qr-wrap { border-color: var(--synergy-yellow); }
+  .qr-wrap img {
+    display: block;
+    width: 170px;
+    height: 170px;
+    image-rendering: pixelated;
+  }
+
+  .card h3 {
+    font-size: 1.15em;
+    color: var(--synergy-navy);
+    margin-bottom: 8px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .card p {
+    font-size: 0.9em;
+    color: var(--text-muted);
+    margin-bottom: 18px;
+    flex-grow: 1;
+  }
+
+  .btn-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--synergy-navy);
+    color: #fff;
+    text-decoration: none;
+    padding: 11px 22px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.9em;
+    transition: all 0.25s ease;
+    border: 2px solid var(--synergy-navy);
+  }
+  .btn-link:hover {
+    background: var(--synergy-yellow);
+    border-color: var(--synergy-yellow);
+    color: var(--synergy-navy);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(255, 199, 44, 0.35);
+  }
+  .btn-link svg { width: 16px; height: 16px; }
+
+  .link-text {
+    display: block;
+    font-size: 0.75em;
+    color: var(--text-muted);
+    word-break: break-all;
+    margin-top: 12px;
+    font-family: 'Consolas', monospace;
+  }
+
+  /* ===== ПОДВАЛ ===== */
+  .footer {
+    background: var(--synergy-gray);
+    padding: 26px 50px;
+    border-top: 1px solid #E1E8F0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    font-size: 0.85em;
+    color: var(--text-muted);
+  }
+  .footer .brand-mini {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 600;
+    color: var(--synergy-navy);
+  }
+  .footer .brand-mini span:first-child {
+    width: 28px; height: 28px;
+    background: var(--synergy-yellow);
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; color: var(--synergy-navy);
+    font-size: 0.95em;
+  }
+  .footer a {
+    color: var(--synergy-blue);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .footer a:hover { text-decoration: underline; }
+
+  /* ===== АДАПТИВ ===== */
+  @media (max-width: 640px) {
+    body { padding: 14px 10px; }
+    .header { padding: 28px 22px; }
+    .header h1 { font-size: 1.4em; }
+    .content { padding: 26px 22px 34px; }
+    .footer { padding: 20px 22px; }
+    .qr-wrap img { width: 150px; height: 150px; }
+  }
+
+  /* ===== ПЕЧАТЬ ===== */
+  @media print {
+    body { background: #fff; padding: 0; }
+    .document { box-shadow: none; border-radius: 0; }
+    .card { page-break-inside: avoid; }
+    .btn-link { box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="document">
+
+  <!-- ШАПКА -->
+  <div class="header">
+    <div class="brand">
+      <div class="brand-logo">С</div>
+      <div class="brand-name">
+        УНИВЕРСИТЕТ «СИНЕРГИЯ»
+        <small>SYNERGY UNIVERSITY</small>
+      </div>
+    </div>
+    <h1>Интерактивные тренажёры и тестирование</h1>
+    <p>МДК.02.03. Цифровые технологии кодирования товаров · Темы 1–2</p>
+    <div class="badge">Наведите камеру телефона на QR-код или нажмите на ссылку</div>
+  </div>
+
+  <!-- КОНТЕНТ -->
+  <div class="content">
+
+    <div class="section-title">Учебные материалы</div>
+    <div class="section-heading">Выберите нужный тренажёр</div>
+    <div class="section-sub">Все материалы открываются в браузере на любом устройстве — компьютере, планшете или смартфоне. Интернет не требуется после первой загрузки.</div>
+
+    <div class="grid">
+
+      <!-- КАРТОЧКА 1: Тестирование по темам 1-2 -->
+      <div class="card qr">
+        <div class="qr-wrap">
+          <img
+            src="https://api.qrserver.com/v1/create-qr-code/?size=340x340&margin=0&data=https%3A%2F%2Fkerchak1979-cloud.github.io%2FTest%2F"
+            alt="QR-код: Тестирование по темам 1–2"
+            loading="lazy">
+        </div>
+        <h3>Тестирование по темам 1–2</h3>
+        <p>50 вопросов закрытого типа по кодированию потребительских товаров и ТН ВЭД ЕАЭС. Мгновенная проверка, счётчик правильных ответов и итоговая оценка.</p>
+        <!-- ССЫЛКА -->
+        <a class="btn-link" href="https://kerchak1979-cloud.github.io/Test/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+          Открыть тестирование
+        </a>
+        <span class="link-text">kerchak1979-cloud.github.io/Test/</span>
+      </div>
+
+      <!-- КАРТОЧКА 2: Тренажёр (одна задача) -->
+      <div class="card qr">
+        <div class="qr-wrap">
+          <img
+            src="https://api.qrserver.com/v1/create-qr-code/?size=340x340&margin=0&data=https%3A%2F%2Fkerchak1979-cloud.github.io%2Ftrener%2F"
+            alt="QR-код: Тренажёр — одна задача для примера"
+            loading="lazy">
+        </div>
+        <h3>Тренажёр: одна задача для примера</h3>
+        <p>Пошаговый разбор классификации мягкой набивной игрушки по ОПИ 1 и ОПИ 6. Наглядный алгоритм: от функции товара до 10-значного кода.</p>
+        <!-- ССЫЛКА -->
+        <a class="btn-link" href="https://kerchak1979-cloud.github.io/trener/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+          Открыть тренажёр
+        </a>
+        <span class="link-text">kerchak1979-cloud.github.io/trener/</span>
+      </div>
+
+      <!-- КАРТОЧКА 3: Тренажёр для работы с ОПИ ТН ВЭД -->
+      <div class="card qr">
+        <div class="qr-wrap">
+          <img
+            src="https://api.qrserver.com/v1/create-qr-code/?size=340x340&margin=0&data=https%3A%2F%2Fkerchak1979-cloud.github.io%2F20-tasks%2F"
+            alt="QR-код: Тренажёр для работы с ОПИ ТН ВЭД"
+            loading="lazy">
+        </div>
+        <h3>Тренажёр для работы с ОПИ ТН ВЭД</h3>
+        <p>20 практических задач на определение 10-значного кода. Пошаговый алгоритм с наводящими вопросами «Да / Нет» и полным обоснованием по каждому ОПИ.</p>
+        <!-- ССЫЛКА -->
+        <a class="btn-link" href="https://kerchak1979-cloud.github.io/20-tasks/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+          Открыть тренажёр
+        </a>
+        <span class="link-text">kerchak1979-cloud.github.io/20-tasks/</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ПОДВАЛ -->
+  <div class="footer">
+    <div class="brand-mini">
+      <span>С</span>
+      Университет «Синергия» · 2026
+    </div>
+    <div>
+      Дисциплина: <b>МДК.02.03</b> · Преподаватель: <b>Керчак</b>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
